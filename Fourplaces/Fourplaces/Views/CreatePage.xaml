@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<forms:BaseContentPage xmlns:forms="clr-namespace:Storm.Mvvm.Forms;assembly=Storm.Mvvm.Forms"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
+    x:Class="Fourplaces.Views.CreatePage"
+    Title="{Binding PageName, Mode=OneTime}">
+    <ScrollView
+        Orientation="Vertical">
+        <StackLayout
+            Orientation="Vertical"
+            Margin="10,10,10,0">
+            <Grid>
+            <Label
+                Text="Nom"  />
+            <Entry
+                Text="{Binding Nom}" Margin="0,-12,0,0" />
+
+            
+                <Entry
+                Text="{Binding Position.Longitude}" Placeholder="Longitude" Grid.Column="1" Grid.Row="0"/>
+
+                <Entry
+                Text="{Binding Position.Latitude}" Placeholder="Latitude" Grid.Column="1" Grid.Row="1"/>
+                 <Button
+                Command="{Binding GetLocalitationCommand}"
+                Text="Localisation" Grid.Column="1" Grid.Row="2"
+                    BackgroundColor="Coral"
+                    TextColor="White"/>
+
+
+           
+            </Grid>
+            <Grid>
+                <Label
+                Text="Description" Grid.Column="0" Grid.Row="0" Margin="0,-10,0,0"/>
+                 <Editor
+                Text="{Binding Description}" Grid.Column="0" Grid.Row="0" Margin="0,0,0,0"/>
+               <ContentView Content="{Binding MapView}" Grid.Column="1" Grid.Row="0" Grid.RowSpan="3" BackgroundColor="Black"/>
+
+               
+            </Grid>
+
+            <Grid>
+                <Button
+                Text="Prendre une photo"  Command="{Binding TakePictureValidateCommand}" FontSize="12" TextColor="White" BackgroundColor="Black" Grid.Column="0" Grid.Row="1"/>
+
+                <Button
+                Text="Selectionner une photo" Command="{Binding PickPictureCommand}" FontSize="12" BackgroundColor="MediumOrchid" TextColor="White"  Grid.Column="0" Grid.Row="2"/>
+
+                <Image Source="{Binding ImageTake}" Grid.Column="1" Grid.Row="0" Grid.RowSpan="3" BackgroundColor="Black"/>
+            </Grid>
+            
+
+            
+
+            <Button
+                Command="{Binding ValidateCommand}"
+                Text="Valider" 
+                BackgroundColor="LightGreen"
+                TextColor="White"/>
+
+            <Label Text="{Binding ErrorMsg}" IsVisible="{Binding ErrorBool}" FontSize="Micro" TextColor="Red" HorizontalOptions="Center"/>
+        </StackLayout>
+    </ScrollView>
+</forms:BaseContentPage> 

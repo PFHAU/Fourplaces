@@ -1,0 +1,125 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<forms:BaseContentPage xmlns:forms="clr-namespace:Storm.Mvvm.Forms;assembly=Storm.Mvvm.Forms"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
+    x:Class="Fourplaces.Views.AffichePage"
+    xmlns:local="clr-namespace:TD.Api.Dtos"
+    Title="{Binding Nom, Mode=OneTime}">
+
+    <RelativeLayout
+        VerticalOptions="FillAndExpand">
+        <ListView
+            RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=1}"
+            RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1}"
+            ItemsSource="{Binding CommentsList}"
+            HasUnevenRows="True"
+            SeparatorColor="Black"
+            Footer="">
+            <ListView.Header>
+                <Grid RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="300" />
+
+                    </Grid.RowDefinitions>
+                    <Image Source="{Binding Image.Source, Mode=TwoWay}" Grid.Column="0" Grid.Row="0" Aspect="AspectFill"/>
+                    <ContentView Content="{Binding MapView}" HeightRequest="100" Grid.Column="0" Grid.Row="1"/>
+                    <Label Text="{Binding Description, Mode=TwoWay}" Grid.Column="0" Grid.Row="2"
+                       FontAttributes="Italic" TextColor="Black" FontSize="Medium" Margin="20,0,20,10"/>
+
+                    <Grid Grid.Column="0" Grid.Row="3">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.8*"/>
+                            <ColumnDefinition Width="0.2*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="60" />
+
+                        </Grid.RowDefinitions>
+
+                        <Entry  
+                           Text="{Binding Message}"
+                           FontSize="12"
+                           ClearButtonVisibility="WhileEditing"
+                           Keyboard="Chat"
+                           ReturnType="Done"
+                            ReturnCommand="{Binding SendMsgCommand}" 
+                               Grid.Column="0"/>
+
+                        <Button Command="{Binding SendMsgCommand}"
+                                Text="Send"
+                                IsEnabled="{Binding IsEnableButton}"
+                                BackgroundColor="Accent" 
+                                Grid.Column="1"/>
+                        
+                        <Label
+                            Text="{Binding ErrorMsg}"
+                               IsVisible="{Binding ErrorBool}"
+                               TextColor="Red"
+                               FontSize="Micro"
+                               HorizontalTextAlignment="Center" Grid.Row="1"/>
+                    </Grid>
+
+
+                </Grid>
+                </ListView.Header>
+            <ListView.ItemTemplate>
+                <DataTemplate
+                    x:DataType="local:CommentItem">
+                    <ViewCell>
+
+                        <StackLayout
+                            Margin="6,3"
+                            Orientation="Vertical">
+                            
+                                <Grid RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=1, Constant=100}">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="100"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="100" />
+
+                                    </Grid.RowDefinitions>
+                                    <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="0.2*" />
+
+                                    </Grid.RowDefinitions>
+                                    <Label Grid.Column="0" Grid.Row="1" BackgroundColor="White" HeightRequest="50" WidthRequest="50"/>
+                                        <Label Text="{Binding Author.FirstName, Mode=TwoWay}" Grid.Column="0" Grid.Row="0" HorizontalTextAlignment="Center" TextColor="Back"/>
+                                        
+                                    </Grid>
+                                    
+                                    <RelativeLayout Grid.Column="1" >
+                                        <Label
+                                        Text="{Binding Date, Mode=TwoWay}"
+                                        
+                                        FontSize="12" 
+                                        VerticalTextAlignment="End"
+                                            TextColor="LightGray"
+                                            RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent,
+                                        Property=Y,Factor=1,Constant=0}"/>
+
+                                        <Label x:Name="Title" VerticalOptions="Start"
+                                    Text="{Binding Text, Mode=OneWay}"
+                                               TextColor="Black"
+                                           RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent,
+                                        Property=Y,Factor=1,Constant=25}"
+                                       
+                                       />
+                                    </RelativeLayout>
+
+                                </Grid>
+                        
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </RelativeLayout>
+
+
+
+
+
+</forms:BaseContentPage>

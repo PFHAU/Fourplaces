@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<forms:BaseContentPage xmlns:forms="clr-namespace:Storm.Mvvm.Forms;assembly=Storm.Mvvm.Forms"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:local="clr-namespace:Fourplaces.Models"
+    mc:Ignorable="d"
+    x:Class="Fourplaces.Views.RegisterPage">
+    <StackLayout>
+        <Entry
+            Text="{Binding Email}" Placeholder="Email"/>
+        <Entry
+            Text="{Binding FirstName}" Placeholder="First Name"/>
+        <Entry
+            Text="{Binding LasteName}" Placeholder="Last Name"/>
+        <Entry
+            Text="{Binding Password}"
+            IsPassword="True"
+            Placeholder="Password"/>
+        <Label Text="{Binding ErrorMsg}" IsVisible="{Binding ErrorBool}" />
+        <Button
+            Command="{Binding RegisterCommand}"
+            Text="Valider" 
+            IsEnabled="{Binding IsEnableButton}"/>
+    </StackLayout>
+</forms:BaseContentPage>

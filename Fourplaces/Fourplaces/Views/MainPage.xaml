@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<forms:BaseContentPage xmlns:forms="clr-namespace:Storm.Mvvm.Forms;assembly=Storm.Mvvm.Forms"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:local="clr-namespace:Fourplaces.Models"
+    mc:Ignorable="d"
+    x:Class="Fourplaces.Views.MainPage"
+    NavigationPage.HasBackButton="False">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text = "Deconexion" Command="{Binding DeconnectionCommand}" />
+    </ContentPage.ToolbarItems>
+
+    <StackLayout Margin="10, 10, 10, 10">
+        <ListView
+            ItemsSource="{Binding LieuList, Mode=TwoWay}"
+            SelectedItem="{Binding SelectedLieu, Mode=TwoWay}"
+            HasUnevenRows="True"
+            Footer="">
+            <ListView.ItemTemplate>
+                <DataTemplate
+                    x:DataType="local:Lieu">
+                    <ViewCell>
+                        <Grid>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="100"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="100" />
+
+                                </Grid.RowDefinitions>
+                                <Label Grid.Column="0" Grid.Row="0" BackgroundColor="White"/>
+                                <Image Source="{Binding Image.Source, Mode=TwoWay}" Grid.Column="0" Grid.Row="0" VerticalOptions="Center" Aspect="AspectFill"/>
+                                <RelativeLayout Grid.Column="1">
+                                    <Label
+                                        Text="{Binding Nom, Mode=TwoWay}"
+                                        TextColor="Black"
+                                        FontSize="20" 
+                                        VerticalTextAlignment="End"
+                                            RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent,
+                                        Property=Y,Factor=1,Constant=0}"/>
+
+                                    <Label x:Name="Title" VerticalOptions="Start"
+                                    Text="{Binding Description, Mode=OneWay}"
+                                           RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent,
+                                        Property=Y,Factor=1,Constant=25}"/>
+                                </RelativeLayout>
+
+                            </Grid>
+
+                        </Grid>
+                    </ViewCell>
+
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <Button x:Name="add"
+            Command="{Binding CreateLieuCommand}"
+                Text="Ajouter"
+                IsEnabled="{Binding IsEnableButton}"
+                BackgroundColor="LightGreen"
+                TextColor="White"
+              />
+         <Button x:Name="myAccont"
+            Command="{Binding MyAccountCommand}"
+                Text="Mon Compte"
+                BackgroundColor="Coral"
+                TextColor="White"
+               />
+    </StackLayout>
+</forms:BaseContentPage>
